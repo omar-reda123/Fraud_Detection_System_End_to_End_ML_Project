@@ -1,0 +1,23 @@
+# Data Manipulation
+pandas
+numpy
+
+# Visualization
+matplotlib
+seaborn
+
+# Machine Learning
+scikit-learn
+xgboost
+lightgbm
+imblearn        # مهمة جداً عشان الـ SMOTE والـ Resampling
+
+# API & Deployment
+fastapi
+uvicorn
+pydantic
+
+# Utilities
+pyyaml
+joblib
+python-dotenv

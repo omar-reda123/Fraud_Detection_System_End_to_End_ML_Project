@@ -1,0 +1,32 @@
+# Python Environment
+venv/
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Data (Very Important: Don't push large CSVs)
+data/raw/*.csv
+data/processed/*.csv
+data/external/*.csv
+
+# If you want to keep the folders but hide the files:
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+!data/external/.gitkeep
+
+# Models (Large binaries)
+models/*.pkl
+models/*.joblib
+models/*.h5
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+
+# Logs & Configs
+logs/
+*.log
+.env
+
+# IDEs
+.vscode/
+.idea/
