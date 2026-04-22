@@ -1,5 +1,5 @@
 import pandas as pd
-from data.ingestion import DataIngestor
+import logging
 
 
 class FeatureEngineer:
@@ -9,6 +9,7 @@ class FeatureEngineer:
     def add_features(self,df:pd.DataFrame):
         data=df.copy()
         data[self.new_col]=((data[self.time_col]//3600)%24).astype(int)
+        logging.info(f"Created new feature {self.new_col} from old feature {self.time_col}")
         return data
 
 
