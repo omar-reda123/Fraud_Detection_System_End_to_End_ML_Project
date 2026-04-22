@@ -1,7 +1,7 @@
 import pandas as pd
 import logging
 
-
+logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
 class FeatureEngineer:
     def __init__(self, time_column='Time', new_column='Hour'):
         self.time_col = time_column
