@@ -10,9 +10,21 @@ logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
 
 class ModelTrainer:
     def __init__(self):
-        self.model=LogisticRegression(class_weight='balanced',max_iter=10000,random_state=42)
+        self.model = RandomForestClassifier(
+            n_estimators=100, 
+            max_depth=10,
+            class_weight='balanced', 
+            random_state=42,
+            n_jobs=-1 
+        )
     def train_data(self,X_train:pd.DataFrame,y_train:pd.Series):
          logging.info("Training in progress!")
+         
+         model_name = type(self.model).__name__
+         model_params = self.model.get_params()
+         logging.info(f"Model Selected: {model_name}")
+         logging.info(f"Model Parameters: {model_params}")
+
          self.model.fit(X_train,y_train)
          logging.info("Training finished!")
          return self.model
