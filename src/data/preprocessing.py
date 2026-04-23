@@ -21,7 +21,7 @@ class FraudPreprocessor:
         
         return data
     def fit(self,df:pd.DataFrame):
-        self.scaler.fit(df[['Time','Amount']])
+        self.scaler.fit(df[['Amount']])
         self.imputer.fit(df)
         logging.info("Fitting completed successfully.")
         return self
@@ -30,7 +30,7 @@ class FraudPreprocessor:
         data=df.copy()
         imputed_data=self.imputer.transform(data) #returns array not dataframe
         data=pd.DataFrame(imputed_data,columns=data.columns,index=data.index)
-        data[['Time','Amount']]=self.scaler.transform(data[['Time', 'Amount']])
+        data[['Amount']]=self.scaler.transform(data[['Amount']])
         logging.info("Transformation completed successfully.")
         return data
     def fit_transform(self, df: pd.DataFrame):

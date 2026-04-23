@@ -10,6 +10,8 @@ class FeatureEngineer:
         data=df.copy()
         data[self.new_col]=((data[self.time_col]//3600)%24).astype(int)
         logging.info(f"Created new feature {self.new_col} from old feature {self.time_col}")
+        data=data.drop(columns=[self.time_col])
+        logging.info(f"Dropped original feature '{self.time_col}'.")
         return data
 
 
