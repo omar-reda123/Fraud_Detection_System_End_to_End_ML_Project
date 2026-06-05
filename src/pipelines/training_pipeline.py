@@ -1,4 +1,5 @@
 import logging
+import joblib
 from src.data.ingestion import DataIngestor
 from src.features.feature_engineering import FeatureEngineer
 from src.data.preprocessing import FraudPreprocessor
@@ -31,6 +32,8 @@ class TrainingPipeline:
         val_df = self.preprocessor.clean_data(val_df, is_train=False)
         
         train_df = self.preprocessor.fit_transform(train_df)
+        joblib.dump(self.preprocessor, "models/preprocessor.pkl")
+        logging.info("Saved preprocessor")
         val_df = self.preprocessor.transform(val_df)
         
         # 4. Split X and y
