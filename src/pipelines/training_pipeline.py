@@ -26,29 +26,32 @@ class TrainingPipeline:
         # 2. Feature Engineering
         train_df = self.engineer.add_features(train_df)
         val_df = self.engineer.add_features(val_df)
-        
-        # 3. Preprocessing (Cleaning & Scaling/Imputing)
+
+        # 3. cleaning before splitting
         train_df = self.preprocessor.clean_data(train_df, is_train=True)
         val_df = self.preprocessor.clean_data(val_df, is_train=False)
         
-        train_df = self.preprocessor.fit_transform(train_df)
-        joblib.dump(self.preprocessor, "models/preprocessor.pkl")
-        logging.info("Saved preprocessor")
-        val_df = self.preprocessor.transform(val_df)
-        
-        # 4. Split X and y
+        # 4. Split X and y 
         y_train = train_df['Class']
         X_train = train_df.drop('Class', axis=1)
         
         y_val = val_df['Class']
         X_val = val_df.drop('Class', axis=1)
+       
+        
+        # 5. Preprocessing (Scaling/Imputing)
+        train_df = self.preprocessor.fit_transform(X_train)
+        joblib.dump(self.preprocessor, "models/preprocessor.pkl")
+        logging.info("Saved preprocessor")
+        val_df = self.preprocessor.transform(X_val)
         
         
-        # 5. Train Model
+        
+        # 6. Train Model
         self.trainer.train_data(X_train, y_train)
         self.trainer.save_model()
         
-        # 6. Evaluate Model
+        # 7. Evaluate Model
         logging.info("--- Evaluating Model on Validation Data ---")
         self.evaluator.evaluate_model(self.trainer.model, X_val, y_val)
         
