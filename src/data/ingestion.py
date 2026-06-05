@@ -4,7 +4,7 @@ import logging
 
 logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
 class DataIngestor:
-    def __init__(self,data_path:str="data/raw"):
+    def __init__(self,data_path:str="data/processed"):
         self.path=data_path
 
     def load_data(self,file_name:str)->pd.DataFrame: 
