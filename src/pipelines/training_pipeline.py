@@ -19,8 +19,8 @@ class TrainingPipeline:
         logging.info("--- Starting ML Pipeline ---")
         
         # 1. Ingestion
-        train_df = self.ingestor.load_data(train_path)
-        val_df = self.ingestor.load_data(val_path)
+        train_df = self.ingestor.load_data(train_path,is_train=True)
+        val_df = self.ingestor.load_data(val_path,is_train=False)
         
         # 2. Feature Engineering
         train_df = self.engineer.add_features(train_df)

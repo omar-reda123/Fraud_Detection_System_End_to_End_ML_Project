@@ -7,7 +7,10 @@ class DataIngestor:
     def __init__(self,data_path:str="data/processed"):
         self.path=data_path
 
-    def load_data(self,file_name:str)->pd.DataFrame: 
+    def load_data(self,file_name:str,is_train=False)->pd.DataFrame: 
+        if not is_train:
+            self.path="data/raw"        
+            
         full_path = os.path.join(self.path, file_name)
 
         try:
